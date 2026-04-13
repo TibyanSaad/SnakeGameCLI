@@ -32,4 +32,3 @@ A basic Snake game program in Java that handles movement, food spawning, growth,
 - Down
 - Left
 - Right 
-if number of steps is not specified then the default number of steps is 1.
