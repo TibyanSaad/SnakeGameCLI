@@ -19,13 +19,17 @@ A basic Snake game program in Java that handles movement, food spawning, growth,
 1. Open Command Prompt and navigate to the folder containing your files:
    ```cmd
    cd C:\Users\YourName\SnakeGame\src
-   javac MoveSnake.java [direction] [steps]
+2. Compile the program:
+   ```cmd
+   javac MoveSnake.java
+3. Run the program with a direction (and optional steps (deafualt is 1)):
+   ```cmd
    java MoveSnake up
    java MoveSnake right 3
 
 ## Valid Movement
--Up
--Down
--Left
--Right 
+- Up
+- Down
+- Left
+- Right 
 if number of steps is not specified then the default number of steps is 1.
