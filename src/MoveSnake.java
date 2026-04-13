@@ -326,7 +326,7 @@ public class MoveSnake {
         HashSet<String> snakeBodyCollision = new HashSet<>();
         try {
             List<String> coordinate = Files.readAllLines(
-                    Path.of("src/main/java/com/agileoracleseval/slitheringeval/tibyan_saad/ProjectSlithering/snakeCoordinates.txt"));
+                    Path.of("snakeCoordinates.txt"));
             for (String sCoordinate : coordinate) {
                 sCoordinate = sCoordinate.trim();
 
@@ -364,7 +364,7 @@ public class MoveSnake {
         HashSet<String> snakeBodyCheckForFood = new HashSet<>();
         try {
             List<String> coordinate = Files.readAllLines(
-                    Path.of("src/main/java/com/agileoracleseval/slitheringeval/tibyan_saad/ProjectSlithering/snakeCoordinates.txt"));
+                    Path.of("snakeCoordinates.txt"));
             for (String sCoordinate : coordinate) {
                 sCoordinate = sCoordinate.trim();
 
