@@ -12,7 +12,7 @@ public class MoveSnake {
 
     public static void main(String[] args) throws InterruptedException {
         char[][] mapArray2D;
-        Path snakeFile = Path.of("map.txt");
+        Path snakeFile = Path.of("src/map.txt");
         try {
             // read file
             ArrayList<String> mapArray = (ArrayList<String>) Files.readAllLines(snakeFile);
@@ -35,7 +35,7 @@ public class MoveSnake {
 
         // Read snake positions from snakeCoordinates.txt to save previous snake coordinates
         try {
-            List<String> coordinate = Files.readAllLines(Path.of("snakeCoordinates.txt"));
+            List<String> coordinate = Files.readAllLines(Path.of("src/snakeCoordinates.txt"));
             for (String sCoordinate : coordinate) {
                 sCoordinate = sCoordinate.trim();
 
@@ -259,7 +259,7 @@ public class MoveSnake {
         for (int[] body : snakeBody) {
             mapArray2D[body[0]][body[1]] = 'o';// update snake positions
         }
-        Path snakeFile = Path.of("map.txt");// write map to file
+        Path snakeFile = Path.of("src/map.txt");// write map to file
         List<String> mapLines = new ArrayList<>();
         for (char[] row : mapArray2D) {
             String line = "";
@@ -282,7 +282,7 @@ public class MoveSnake {
     // to save the state of snake every run and keep track of head location
     public static void snakeTrackingFile(ArrayList<int[]> snakeBody) {
         try {
-            FileWriter writer = new FileWriter("snakeCoordinates.txt");
+            FileWriter writer = new FileWriter("src/snakeCoordinates.txt");
 
             for (int[] snakeCoord : snakeBody) {
                 // Write each coordinate pair tgt
@@ -291,10 +291,26 @@ public class MoveSnake {
             System.out.println();
 
             writer.close();
+            gitCommit();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
+    }
+
+    public static void gitCommit() {
+        try {
+            ProcessBuilder pbAdd = new ProcessBuilder("git", "add", "snakeCoordinates.txt", "map.txt");
+            pbAdd.directory(new java.io.File("src"));
+            pbAdd.start().waitFor();
+
+            ProcessBuilder pbCommit = new ProcessBuilder("git", "commit", "-m", "updated snake position");
+            pbCommit.directory(new java.io.File("src"));
+            pbCommit.inheritIO();
+            pbCommit.start().waitFor();
+        } catch (Exception e) {
+            System.err.println("Git commit failed: " + e.getMessage());
+        }
     }
 
     //prevent snake invalid movement(head collision with prev body segment)
@@ -326,7 +342,7 @@ public class MoveSnake {
         HashSet<String> snakeBodyCollision = new HashSet<>();
         try {
             List<String> coordinate = Files.readAllLines(
-                    Path.of("snakeCoordinates.txt"));
+                    Path.of("src/snakeCoordinates.txt"));
             for (String sCoordinate : coordinate) {
                 sCoordinate = sCoordinate.trim();
 
@@ -364,7 +380,7 @@ public class MoveSnake {
         HashSet<String> snakeBodyCheckForFood = new HashSet<>();
         try {
             List<String> coordinate = Files.readAllLines(
-                    Path.of("snakeCoordinates.txt"));
+                    Path.of("src/snakeCoordinates.txt"));
             for (String sCoordinate : coordinate) {
                 sCoordinate = sCoordinate.trim();
 
